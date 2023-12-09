@@ -24,6 +24,15 @@ jobs:
         with:
           node-version: 21.x
           cache: 'npm'
+
+      - uses: mr-smithers-excellent/docker-build-push@v6
+        name: Build and push docker image
+        with:
+          image: jsr1der/express_playground
+          tags: v1
+          registry: docker.io
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
       - run: npm ci
       - run: npm run build --if-present
   #    - run: npm test
