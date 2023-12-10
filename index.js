@@ -1,11 +1,10 @@
 import express from 'express';
 import {listen} from "./utils/app.utils.js";
 import {appRouter} from "./app.router.js";
+import cors from 'cors'
 
 const port = process.env.PORT || 3000;
 const app = express();
-app.use('/app', appRouter)
-app.get('**', (req, res) => {
-    res.redirect('/app')
-})
+app.use(cors())
+app.use('/api', appRouter)
 app.listen(port, listen)
