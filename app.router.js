@@ -45,11 +45,11 @@ appRouter.get('/check-user', async (req, res) => {
 appRouter.post('/register-user', async (req, res) => {
     const ipAddress = req.header('x-forwarded-for') || req.socket.remoteAddress;
     const post = await registerUser(db, {name: req.body.name, ip: ipAddress})
-    if (post) {
+    try {
         res.json(post)
-    } else {
-        res.status(500).error('Server error')
-    }    // replace to regexp
+    } catch (e) {
+        res.status(500).error(e.message)
+    }
     // if (ipAddress && ipAddress !== "::1" && ipAddress !== "127.0.0.1") {
 
     // let user;
