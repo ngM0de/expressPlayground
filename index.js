@@ -6,7 +6,7 @@ import bodyParser from "body-parser";
 
 const port = process.env.PORT || 3000;
 const app = express();
-app.use(cors())
+app.use(cors({origins: ['https://first-angular-docker.onrender.com','http://localhost:4200']}))
 app.use(bodyParser.json())
 app.use('/api', appRouter)
 app.listen(port, listen)
